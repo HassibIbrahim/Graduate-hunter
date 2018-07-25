@@ -1,62 +1,41 @@
-// user logic
 $(document).ready(function(){
-  $(".p1").hide()
-  $("#button-home").click(function(event){
-  $(".p1").show();
 
 
-
-
-
-});
-});
-
-/* Highlight the current section in the navigation bar
-------------------------------------------------------*/
-
-	var sections = $("section");
+var sections = $("section");
 	var navigation_links = $("#nav-wrap a");
 
-	sections.waypoint({
+	// sections.waypoint({
+  //
+  //     handler: function(event, direction) {
+  //
+	// 	   var active_section;
+  //
+	// 		active_section = $(this);
+	// 		if (direction === "up") active_section = active_section.prev();
+  //
+	// 		var active_link = $('#nav-wrap a[href="#' + active_section.attr("id") + '"]');
+  //
+  //        navigation_links.parent().removeClass("current");
+	// 		active_link.parent().addClass("current");
+  //
+	// 	},
+	// 	offset: '35%'
+  //
+	// });
 
-      handler: function(event, direction) {
+  var coll = document.getElementsByClassName("collapsible");
 
-		   var active_section;
+  var i;
 
-			active_section = $(this);
-			if (direction === "up") active_section = active_section.prev();
-
-			var active_link = $('#nav-wrap a[href="#' + active_section.attr("id") + '"]');
-
-         navigation_links.parent().removeClass("current");
-			active_link.parent().addClass("current");
-
-		},
-		offset: '35%'
-
-	});
-
-
-
-  /*	Fade In/Out Primary Navigation
-------------------------------------------------------*/
-
-   $(window).on('scroll', function() {
-
-		var h = $('header').height();
-		var y = $(window).scrollTop();
-      var nav = $('#nav-wrap');
-
-	   if ( (y > h*.20) && (y < h) && ($(window).outerWidth() > 768 ) ) {
-	      nav.fadeOut('fast');
-	   }
-      else {
-         if (y < h*.20) {
-            nav.removeClass('opaque').fadeIn('fast');
-         }
-         else {
-            nav.addClass('opaque').fadeIn('fast');
-         }
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var content = this.nextElementSibling;
+      if (content.style.maxHeight){
+        content.style.maxHeight = null;
+      } else {
+        content.style.maxHeight = content.scrollHeight + "px";
       }
-
-	});
+    });
+  }
+});
